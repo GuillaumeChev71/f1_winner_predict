@@ -1,12 +1,22 @@
 import fastf1
 import pandas as pd
 import numpy as np
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error
 
-# Enable FastF1 caching
-fastf1.Cache.enable_cache("f1_cache")
+
+# Chemin du répertoire de cache
+cache_directory = "f1_cache"
+
+# Vérifie si le répertoire existe, sinon le crée
+if not os.path.exists(cache_directory):
+    os.makedirs(cache_directory)
+
+# Active le cache
+fastf1.Cache.enable_cache(cache_directory)
+
 
 # Load FastF1 2024 Australian GP race session
 session_2024 = fastf1.get_session(2024, 3, "R")
